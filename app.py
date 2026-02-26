@@ -70,14 +70,14 @@ st.plotly_chart(fig3, use_container_width=True)
 # Route Efficiency Leaderboard
 # -----------------------------
 
+# Route Efficiency Leaderboard
 route_summary = filtered_df.groupby('State/Province').agg(
     Avg_Lead_Time=('Shipping Lead Time', 'mean'),
     Shipments=('Order ID', 'count'),
     Total_Sales=('Sales', 'sum')
 ).reset_index()
 
-route_summary = route_summary.sort_values('Avg_Lead_Time')
+route_summary = route_summary.sort_values('Avg_Lead_Time').reset_index(drop=True)
 
 st.subheader("Route Efficiency Leaderboard (Fastest States)")
-
-st.dataframe(route_summary.head(15))
+st.dataframe(route_summary.head(15), hide_index=True)
